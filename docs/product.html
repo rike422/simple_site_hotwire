@@ -1,13 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="turbo-refresh-method" content="morph">
   <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <meta name="turbo-refresh-method" content="morph">
   <script type="module">
       import * as Turbo from 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.3/+esm';
+    const element = document.getElementById('food_frame')
+    globalThis.selectChange = (event) => {
+      element.src = `products/${event.target.value}`
+      element.reload()
+    }
   </script>
   <title>Wireframe</title>
   <style>
@@ -25,20 +31,19 @@
       <a href="product.html">Product</a>
     </nav>
 
-    <h1>Learn Hotwire</h1>
+    <h1>商品の紹介</h1>
 
-    <p>Yes, you can really use Hotwire without Rails. Give it a try!</p>
+    <p>お問い合わせはこちら</p>
   </header>
   <main style="text-align: center;">
-    <h1>Gallery</h1>
-
-    <turbo-frame id="gallery">
-      <img src="images/ocean.jpeg" alt="Ocean" width="500" height="400">
-      
-      <div>
-        <a href="gallery/forest.html">Next (forest)</a>
-      </div>
-    </turbo-frame>
+    <h2>美味しい商品のご紹介</h2>
+    <select name="food" id="food_serach" onchange="selectChange(event)">
+        <option value="niku.html">培養肉</option>
+        <option value="kakuni.html">角煮まんじゅう</option>
+        <option value="pizza.html">ピザ</option>
+    </select>   
+    <turbo-frame id="food_frame" src="products/niku.html">
+      </turbo-frame>
   </main>
 </body>
 </html>
