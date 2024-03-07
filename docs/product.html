@@ -4,23 +4,28 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
     <meta name="turbo-refresh-method" content="morph" />
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
     <script type="module">
       import * as Turbo from "https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.3/+esm";
-      import {Application, Controller} from "https://unpkg.com/@hotwired/stimulus@3.2.2/dist/stimulus.js"
+      import {
+        Application,
+        Controller,
+      } from "https://unpkg.com/@hotwired/stimulus@3.2.2/dist/stimulus.js";
 
       const app = Application.start();
 
-      app.register('food_select', class extends Controller {
-        connect() {
+      app.register(
+        "food_select",
+        class extends Controller {
+          connect() {}
+          onChange(event) {
+            const frame = document.getElementById("food_frame");
+            frame.src = `products/${event.target.value}`;
+            frame.reload();
+          }
         }
-        onChange(event) {
-          const frame = document.getElementById("food_frame");
-          frame.src = `products/${event.target.value}`;
-          frame.reload();
-        }
-      })
+      );
     </script>
     <title>Wireframe</title>
     <style>
@@ -44,7 +49,11 @@
     </header>
     <main style="text-align: center" data-controller="food_select">
       <h2>美味しい商品のご紹介</h2>
-      <select name="food_select" id="food_select" data-action="food_select#onChange"  >
+      <select
+        name="food_select"
+        id="food_select"
+        data-action="food_select#onChange"
+      >
         <option value="niku.html">培養肉</option>
         <option value="kakuni.html">角煮まんじゅう</option>
         <option value="pizza.html">ピザ</option>
