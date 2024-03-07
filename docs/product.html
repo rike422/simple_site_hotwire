@@ -1,49 +1,55 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-  <meta name="turbo-refresh-method" content="morph">
-  <script type="module">
-      import * as Turbo from 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.3/+esm';
-    const element = document.getElementById('food_frame')
-    globalThis.selectChange = (event) => {
-      element.src = `products/${event.target.value}`
-      element.reload()
-    }
-  </script>
-  <title>Wireframe</title>
-  <style>
-    .turbo-progress-bar {
-      height: 10px;
-      background-color: green;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="contact.html">Contact</a>
-      <a href="product.html">Product</a>
-    </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+    <meta name="turbo-refresh-method" content="morph" />
+    <script type="module">
+      import * as Turbo from "https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.3/+esm";
+      import {Application, Controller} from "https://unpkg.com/@hotwired/stimulus@3.2.2/dist/stimulus.js"
 
-    <h1>商品の紹介</h1>
+      const app = Application.start();
 
-    <p>お問い合わせはこちら</p>
-  </header>
-  <main style="text-align: center;">
-    <h2>美味しい商品のご紹介</h2>
-    <select name="food" id="food_serach" onchange="selectChange(event)">
+      app.register('food_select', class extends Controller {
+        connect() {
+        }
+        onChange(event) {
+          const frame = document.getElementById("food_frame");
+          frame.src = `products/${event.target.value}`;
+          frame.reload();
+        }
+      })
+    </script>
+    <title>Wireframe</title>
+    <style>
+      .turbo-progress-bar {
+        height: 10px;
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+        <a href="product.html">Product</a>
+      </nav>
+
+      <h1>商品の紹介</h1>
+
+      <p>お問い合わせはこちら</p>
+    </header>
+    <main style="text-align: center" data-controller="food_select">
+      <h2>美味しい商品のご紹介</h2>
+      <select name="food_select" id="food_select" data-action="food_select#onChange"  >
         <option value="niku.html">培養肉</option>
         <option value="kakuni.html">角煮まんじゅう</option>
         <option value="pizza.html">ピザ</option>
-    </select>   
-    <turbo-frame id="food_frame" src="products/niku.html">
-      </turbo-frame>
-  </main>
-</body>
+      </select>
+      <turbo-frame id="food_frame" src="products/niku.html"> </turbo-frame>
+    </main>
+  </body>
 </html>
