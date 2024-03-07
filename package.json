@@ -1,0 +1,13 @@
+{
+  "name": "simple_site_hotwire",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+
+"scripts": {
+  "dev": "npx http-server"
+},
+
+  "author": "",
+  "license": "MIT"
+}
